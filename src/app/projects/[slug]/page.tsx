@@ -1,15 +1,34 @@
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
 import ProjectDetailsTemplate from "@/components/templates/ProjectDetailsTemplate";
 import { projects } from "@/shared/data/projects";
-import { notFound } from "next/navigation";
 
 type PageProps = {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 };
 
-export default async function ProjectPage({ params }: PageProps) {
-  const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
-  if (!project) return notFound();
+export function generateStaticParams() {
+  return projects.map((p) => ({ slug: p.slug }));
+}
+
+export const dynamicParams = false;
+
+export function generateMetadata({ params }: PageProps): Metadata {
+  const project = projects.find((p) => p.slug === params.slug);
+
+  if (!project) return { title: "Projeto não encontrado" };
+
+  return {
+    title: `${project.title} • Saulo Matheus`,
+    description: project.description,
+  };
+}
+
+export default function ProjectSlugPage({ params }: PageProps) {
+  const project = projects.find((p) => p.slug === params.slug);
+
+  if (!project) notFound();
 
   return <ProjectDetailsTemplate project={project} />;
 }
