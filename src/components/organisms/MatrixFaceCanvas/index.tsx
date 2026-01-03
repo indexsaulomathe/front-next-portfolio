@@ -6,9 +6,9 @@ import MatrixHeadGLB from "../MatrixHeadGLB";
 
 export default function MatrixFaceCanvas() {
     return (
-        <div className="w-full h-[520px] rounded-2xl border matrix-border bg-black/40 overflow-hidden matrix-glow">
+        <div className="w-full h-[520px] pointer-events-none">
             <Canvas
-                camera={{ position: [0, 0.15, 3.5], fov: 45 }}
+                camera={{ position: [0, 0.05, 2.75], fov: 45 }}
                 dpr={[1, 1.5]}
                 gl={{ antialias: true, alpha: true }}
             >

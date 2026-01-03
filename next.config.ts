@@ -1,10 +1,14 @@
+/** @type {import('next').NextConfig} */
+const isProd: boolean = process.env.NODE_ENV === "production";
+
+const repo = "front-next-portfolio";
+const basePath = isProd ? `/${repo}` : "";
+
 const nextConfig = {
   output: "export",
   images: { unoptimized: true },
-
-  // GitHub Pages (repo pages)
-  basePath: "/front-next-portfolio",
-  assetPrefix: "/front-next-portfolio/",
+  basePath,
+  assetPrefix: basePath ? `${basePath}/` : "",
 };
 
 module.exports = nextConfig;
