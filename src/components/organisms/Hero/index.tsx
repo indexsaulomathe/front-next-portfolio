@@ -4,12 +4,13 @@ import Badge from "@/components/atoms/Badge";
 import Title from "@/components/atoms/Typography/Title";
 import Text from "@/components/atoms/Typography/Text";
 
-const skills = ["Next.js", "NestJS", "Docker", "RabbitMQ"];
+const skills = ["NestJS", "Next.js", "Node.js", "Docker", "RabbitMQ"];
+
 const features = [
-  "Event-driven pipelines (RabbitMQ)",
-  "CSV/TXT streaming & reporting",
-  "Docker / CI-CD / Cloud deploy",
-  "APIs REST, auth, caching",
+  "Interfaces modernas com React/Next.js",
+  "APIs REST robustas com NestJS",
+  "Pipelines event-driven e real-time",
+  "Docker, CI-CD e Cloud deploy",
 ];
 
 export default function Hero() {
@@ -29,7 +30,7 @@ export default function Hero() {
             </Title>
 
             <Text size="lg" className="mt-4 max-w-xl">
-              Eu construo backends robustos com NestJS, filas, streaming e Docker, entregando produtos com foco em performance e confiabilidade.
+              Desenvolvo soluções completas com Vue, Next.js e NestJS, criando interfaces modernas e backends robustos com foco em performance, escalabilidade e experiência do usuário.
             </Text>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
@@ -45,7 +46,7 @@ export default function Hero() {
             </div>
 
             <div className="mt-6 text-xs sm:text-sm text-white/50">
-              Stack: <span className="text-green-400">NestJS • RabbitMQ • Docker • Deploy</span>
+              Stack: <span className="text-green-400">NestJS • Next.js • Node.js • RabbitMQ • Docker • Deploy</span>
             </div>
           </div>
 

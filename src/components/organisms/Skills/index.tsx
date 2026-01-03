@@ -7,12 +7,16 @@ const skillGroups = [
         items: ["NestJS", "TypeScript", "TypeORM", "PostgreSQL", "REST APIs"]
     },
     {
+        title: "Frontend",
+        items: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Vue.js", "REST APIs"]
+    },
+    {
         title: "Infra",
         items: ["Docker", "Nginx", "CI/CD", "Cloud Deploy", "Cloudflare"]
     },
     {
         title: "Mensageria",
-        items: ["RabbitMQ", "Event-driven", "Retries", "DLQ", "Observability"]
+        items: ["RabbitMQ", "Event-driven", "Observability"]
     },
 ];
 
