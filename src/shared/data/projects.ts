@@ -7,44 +7,22 @@ export type Project = {
   links?: {
     github?: string;
     demo?: string;
+    site?: string;
   };
+  openLinksInNewTab?: boolean;
 };
 
 export const projects: Project[] = [
   {
-    slug: "csv-pipeline",
-    title: "Pipeline de Importação CSV",
-    description:
-      "Sistema robusto para importação e processamento de arquivos CSV em larga escala usando streaming, filas e mensageria.",
-    tags: ["NestJS", "RabbitMQ", "Streams", "TypeScript", "PostgreSQL"],
+    slug: "aero-search",
+    title: "Aero Search BR",
+    description: "Site para procura de escolas de aviação no Brasil",
+    tags: ["Next.js", "NestJS", "Node", "TypeScript", "PostgreSQL"],
     content:
-      "Desenvolvemos um pipeline de importação CSV que processa arquivos de até 1GB com sistema de retries e DLQ.",
+      "Foi desenvolvido um site para facilitar a busca por escolas de aviação no Brasil, permitindo que os usuários encontrem instituições de ensino de forma rápida e eficiente.",
     links: {
-      github: "https://github.com/",
+      site: "https://aerosearch.com.br/",
     },
-  },
-  {
-    slug: "escolas-api",
-    title: "API de Escolas (ANAC)",
-    description:
-      "API robusta com cache, filtros avançados e integração com mapas no frontend para visualização de dados educacionais.",
-    tags: ["Next.js", "NestJS", "PostgreSQL", "Leaflet", "REST API"],
-    content:
-      "Criamos uma API escalável com cache em Redis e frontend moderno para visualização de dados geográficos.",
-    links: {
-      demo: "#",
-    },
-  },
-  {
-    slug: "sistema-observabilidade",
-    title: "Sistema de Observabilidade",
-    description:
-      "Implementação completa de observabilidade com logs, métricas e traces em ambiente containerizado.",
-    tags: ["Docker", "ELK Stack", "Prometheus", "Grafana", "CI/CD"],
-    content:
-      "Sistema de observabilidade completo com coleta de logs, métricas e rastreamento distribuído.",
-    links: {
-      github: "https://github.com/",
-    },
+    openLinksInNewTab: true,
   },
 ];

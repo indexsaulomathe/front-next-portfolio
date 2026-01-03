@@ -8,10 +8,43 @@ import type { Project } from "@/shared/data/projects";
 
 interface ProjectDetailsTemplateProps {
   project: Project;
+  openLinksInNewTab?: boolean;
 }
 
-export default function ProjectDetailsTemplate({ project }: ProjectDetailsTemplateProps) {
+type LinkButtonProps = {
+  href: string;
+  children: React.ReactNode;
+  variant: "primary" | "secondary" | "ghost";
+  openInNewTab?: boolean;
+};
+
+function LinkButton({ href, children, variant, openInNewTab }: LinkButtonProps) {
+  if (openInNewTab) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        <Button variant={variant}>{children}</Button>
+      </a>
+    );
+  }
+
+  return (
+    <Button as="link" href={href} variant={variant}>
+      {children}
+    </Button>
+  );
+}
+
+export default function ProjectDetailsTemplate({
+  project,
+  openLinksInNewTab,
+}: ProjectDetailsTemplateProps) {
   const currentYear = new Date().getFullYear();
+
+  const shouldOpenInNewTab =
+    openLinksInNewTab ?? project.openLinksInNewTab ?? false;
+
+  const links = project.links;
+  const hasLinks = Boolean(links?.github || links?.demo || links?.site);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-black via-black to-slate-900 text-white">
@@ -19,7 +52,12 @@ export default function ProjectDetailsTemplate({ project }: ProjectDetailsTempla
 
       <Container>
         <header className="pt-12 pb-8 sm:pt-16 sm:pb-12">
-          <Button as="link" href="/projects" variant="ghost">
+          <Button
+            as="link"
+            href="/projects"
+            variant="ghost"
+            aria-label="Voltar para lista de projetos"
+          >
             ← Voltar para projetos
           </Button>
 
@@ -31,48 +69,76 @@ export default function ProjectDetailsTemplate({ project }: ProjectDetailsTempla
             {project.description}
           </Text>
 
-          <div className="mt-5 flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <Badge key={tag} variant="accent">
-                {tag}
-              </Badge>
-            ))}
-          </div>
+          {project.tags?.length ? (
+            <div
+              className="mt-5 flex flex-wrap gap-2"
+              aria-label="Tecnologias e tópicos do projeto"
+            >
+              {project.tags.map((tag) => (
+                <Badge key={tag} variant="accent">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          ) : null}
 
-          {project.links?.github || project.links?.demo ? (
-            <div className="mt-6 flex gap-3 flex-wrap">
-              {project.links?.github && (
-                <Button
-                  as="link"
-                  href={project.links.github}
-                  variant="secondary"
-                >
-                  Código no GitHub
-                </Button>
-              )}
-
-              {project.links?.demo && (
-                <Button
-                  as="link"
-                  href={project.links.demo}
+          {hasLinks ? (
+            <div className="mt-6 flex gap-3 flex-wrap" aria-label="Links do projeto">
+              {links?.site ? (
+                <LinkButton
+                  href={links.site}
                   variant="primary"
+                  openInNewTab={shouldOpenInNewTab}
+                >
+                  Acessar site
+                </LinkButton>
+              ) : null}
+
+              {links?.demo ? (
+                <LinkButton
+                  href={links.demo}
+                  variant="primary"
+                  openInNewTab={shouldOpenInNewTab}
                 >
                   Ver Demo
-                </Button>
-              )}
+                </LinkButton>
+              ) : null}
+
+              {links?.github ? (
+                <LinkButton
+                  href={links.github}
+                  variant="secondary"
+                  openInNewTab={shouldOpenInNewTab}
+                >
+                  Código no GitHub
+                </LinkButton>
+              ) : null}
             </div>
           ) : null}
         </header>
 
-        <section className="pb-16 border-t border-white/10 pt-12">
+        <section
+          className="pb-16 border-t border-white/10 pt-12"
+          aria-labelledby="case-study-title"
+        >
           <div className="max-w-3xl">
-            <h2 className="text-2xl font-bold text-white mb-4">Case Study</h2>
+            <h2
+              id="case-study-title"
+              className="text-2xl font-bold text-white mb-4"
+            >
+              Case Study
+            </h2>
+
             {project.content ? (
               <Text size="lg" color="default">
                 {project.content}
               </Text>
             ) : (
-              <div className="border border-white/10 rounded-xl p-6 bg-white/5">
+              <div
+                className="border border-white/10 rounded-xl p-6 bg-white/5"
+                role="note"
+                aria-label="Conteúdo do case study ainda não disponível"
+              >
                 <p className="text-white/60">
                   Detalhe completo do projeto: problema → solução → impacto → trade-offs.
                 </p>
