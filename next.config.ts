@@ -1,8 +1,12 @@
-import type { NextConfig } from "next";
+const nextConfig = {
+  output: "export",
+  images: { unoptimized: true },
 
-const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
+  // GitHub Pages (repo pages)
+  basePath: "/front-next-portfolio",
+  assetPrefix: "/front-next-portfolio/",
 };
+
+module.exports = nextConfig;
 
 export default nextConfig;
