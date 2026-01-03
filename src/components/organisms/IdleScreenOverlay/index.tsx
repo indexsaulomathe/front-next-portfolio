@@ -84,7 +84,7 @@ function IdleOverlayContent({ onDismiss }: { onDismiss: () => void }) {
 }
 
 export default function IdleScreenOverlay() {
-    const isIdle = useIdleScreen(1); // 1 minuto
+    const isIdle = useIdleScreen(60000); // 1 minuto
     const [dismissed, setDismissed] = useState(false);
 
     if (!isIdle && dismissed) {
