@@ -42,10 +42,8 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
                             ))}
                         </div>
 
-                        <div className="mt-5">
-                            <Button as="link" href={`/projects/${project.slug}`} variant="ghost">
-                                Ver case study →
-                            </Button>
+                        <div className="mt-5 text-sm text-white/70 group-hover:text-green-400 transition-colors">
+                            Ver case study →
                         </div>
                     </Link>
                 ))}

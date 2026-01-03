@@ -3,11 +3,12 @@ import { projects } from "@/shared/data/projects";
 import { notFound } from "next/navigation";
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-export default function ProjectPage({ params }: PageProps) {
-  const project = projects.find((p) => p.slug === params.slug);
+export default async function ProjectPage({ params }: PageProps) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
   if (!project) return notFound();
 
   return <ProjectDetailsTemplate project={project} />;
