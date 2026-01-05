@@ -26,7 +26,7 @@ export default function Hero() {
             </div>
 
             <Title level="h1" className="mt-6">
-              Portfolio<span className="text-green-400"> Moderno</span> com Projetos Reais
+              Portfolio de<span className="text-green-400"> Saulo Matheus</span> com Projetos Reais
             </Title>
 
             <Text size="lg" className="mt-4 max-w-xl">
