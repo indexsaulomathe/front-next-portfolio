@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useIdleScreen } from "@/hooks/useIdleScreen";
 import MatrixFaceCanvas from "@/components/organisms/MatrixFaceCanvas";
 
@@ -68,17 +68,6 @@ function IdleOverlayContent({ onDismiss }: { onDismiss: () => void }) {
                 </div>
             </div>
 
-            <style>{`
-        @keyframes matrix-fall {
-          0% { transform: translateY(0); opacity: 0.8; }
-          100% { transform: translateY(100vh); opacity: 0; }
-        }
-        .animate-\\[matrix-fall_linear_infinite\\] {
-          animation-name: matrix-fall;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-        }
-      `}</style>
         </div>
     );
 }
@@ -87,9 +76,9 @@ export default function IdleScreenOverlay() {
     const isIdle = useIdleScreen(60000); // 1 minuto
     const [dismissed, setDismissed] = useState(false);
 
-    if (!isIdle && dismissed) {
-        setDismissed(false);
-    }
+    useEffect(() => {
+        if (!isIdle) setDismissed(false);
+    }, [isIdle]);
 
     if (!isIdle || dismissed) return null;
 
