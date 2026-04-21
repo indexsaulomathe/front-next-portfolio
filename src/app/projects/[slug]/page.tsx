@@ -5,7 +5,7 @@ import ProjectDetailsTemplate from "@/components/templates/ProjectDetailsTemplat
 import { projects } from "@/shared/data/projects";
 
 type PageProps = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
@@ -14,8 +14,9 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const project = projects.find((p) => p.slug === params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) return { title: "Projeto não encontrado" };
 
@@ -25,8 +26,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
   };
 }
 
-export default function ProjectSlugPage({ params }: PageProps) {
-  const project = projects.find((p) => p.slug === params.slug);
+export default async function ProjectSlugPage({ params }: PageProps) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) notFound();
 

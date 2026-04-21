@@ -126,7 +126,7 @@ export default function MatrixHeadGLB({ url = "models/head.glb" }: Props) {
     }
     if (glowRef.current) {
       const m = glowRef.current.material as THREE.PointsMaterial;
-      m.opacity = 0.12 + (Math.sin(t * 1.4) * 0.05 + 0.05);
+      m.opacity = 0.17 + Math.sin(t * 1.4) * 0.05;
     }
 
 

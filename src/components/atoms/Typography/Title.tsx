@@ -13,7 +13,7 @@ const sizeStyles = {
 export default function Title({ children, level = "h2", className = "" }: TitleProps) {
     const Component = level;
     return (
-        <Component className={`${sizeStyles[level]} font-bold tracking-tight text-white ${className}`}>
+        <Component className={`${sizeStyles[level]} font-bold tracking-tight text-theme ${className}`}>
             {children}
         </Component>
     );

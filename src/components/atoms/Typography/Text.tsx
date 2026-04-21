@@ -12,8 +12,8 @@ const sizeStyles = {
 };
 
 const colorStyles = {
-    default: "text-white",
-    muted: "text-white/60",
+    default: "text-theme",
+    muted: "text-theme-muted",
 };
 
 export default function Text({ children, size = "base", color = "muted", className = "" }: TextProps) {
