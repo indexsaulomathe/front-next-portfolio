@@ -1,19 +1,26 @@
+"use client";
+
 import Container from "@/components/atoms/Container";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
 import Title from "@/components/atoms/Typography/Title";
 import Text from "@/components/atoms/Typography/Text";
+import { useLanguage } from "@/i18n/LanguageContext";
 
-const skills = ["NestJS", "Next.js", "Node.js", "Docker", "RabbitMQ"];
-
-const features = [
-  "Interfaces modernas com React/Next.js",
-  "APIs REST robustas com NestJS",
-  "Pipelines event-driven e real-time",
-  "Docker, CI-CD e Cloud deploy",
-];
+const skills = ["NestJS", "Node.js", "TypeScript", "RabbitMQ", "Docker", "AWS"];
 
 export default function Hero() {
+  const { t } = useLanguage();
+  const s = t.hero;
+  const st = s.status;
+
+  const statusItems = [
+    { label: st.currentRole, value: st.currentRoleValue },
+    { label: st.location, value: st.locationValue },
+    { label: st.focus, value: st.focusValue },
+    { label: st.openTo, value: st.openToValue },
+  ];
+
   return (
     <section className="pt-12 sm:pt-16 lg:pt-20 pb-10">
       <Container>
@@ -26,47 +33,53 @@ export default function Hero() {
             </div>
 
             <Title level="h1" className="mt-6">
-              Portfolio<span className="text-green-400"> Saulo Matheus</span> com Projetos Reais
+              <span className="text-green-400">{s.titleHighlight}</span> {s.title}
             </Title>
 
             <Text size="lg" className="mt-4 max-w-xl">
-              Desenvolvo soluções completas com Vue, Next.js e NestJS, criando interfaces modernas e backends robustos com foco em performance, escalabilidade e experiência do usuário.
+              {s.description}
             </Text>
 
             <div className="mt-6 flex flex-col sm:flex-row gap-3">
               <Button href="#projects" as="link" variant="primary">
-                Ver projetos
+                {s.btnProjects}
               </Button>
-              <Button href="/projects" as="link" variant="secondary">
-                Página de projetos
+              <Button href="#experience" as="link" variant="secondary">
+                {s.btnExperience}
               </Button>
               <Button href="#contact" as="link" variant="ghost">
-                Contato
+                {s.btnContact}
               </Button>
             </div>
 
-            <div className="mt-6 text-xs sm:text-sm text-white/50">
-              Stack: <span className="text-green-400">NestJS • Next.js • Node.js • RabbitMQ • Docker • Deploy</span>
+            <div className="mt-6 text-xs sm:text-sm text-theme-subtle">
+              {s.stackLabel}{" "}
+              <span className="text-green-400">
+                NestJS • Node.js • TypeScript • RabbitMQ • Docker • AWS
+              </span>
             </div>
           </div>
 
-          {/* Status Card */}
-          <div className="border border-white/10 rounded-xl p-6 bg-white/5 backdrop-blur">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <span className="text-xs text-white/60">/status</span>
-              <span className="text-xs text-green-400 font-medium">ONLINE</span>
+          <div className="border border-theme rounded-xl p-6 bg-theme-surface backdrop-blur">
+            <div className="flex items-center justify-between border-b border-theme pb-3">
+              <span className="text-xs text-theme-faint">/{st.label}</span>
+              <span className="flex items-center gap-1.5 text-xs text-green-400 font-medium">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                {st.badge}
+              </span>
             </div>
 
-            <div className="mt-4 space-y-3">
-              {features.map((feature) => (
-                <div key={feature} className="text-sm text-white/70">
-                  <span className="text-green-400 mr-2">✓</span> {feature}
+            <div className="mt-4 space-y-4">
+              {statusItems.map((item) => (
+                <div key={item.label} className="text-sm">
+                  <p className="text-theme-faint text-xs uppercase tracking-wider">{item.label}</p>
+                  <p className="text-theme-secondary mt-0.5">{item.value}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-5 border-t border-white/10 pt-4 text-xs text-white/40">
-              Desenvolvendo soluções backend escaláveis e confiáveis.
+            <div className="mt-5 border-t border-theme pt-4 text-xs text-theme-faint">
+              {st.footer}
             </div>
           </div>
         </div>

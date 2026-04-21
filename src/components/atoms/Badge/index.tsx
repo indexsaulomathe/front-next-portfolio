@@ -6,8 +6,8 @@ interface BadgeProps {
 export default function Badge({ children, variant = "default" }: BadgeProps) {
     const baseStyles = "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium transition-colors";
     const variants = {
-        default: "border border-white/20 bg-white/5 text-white/70 hover:bg-white/10",
-        accent: "border border-green-500/30 bg-green-500/10 text-green-300",
+        default: "border border-theme bg-theme-surface text-theme-secondary hover:bg-theme-surface-hover",
+        accent: "border border-green-500/30 bg-green-500/10 text-green-600 dark:text-green-300",
     };
 
     return (

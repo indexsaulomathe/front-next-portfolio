@@ -22,8 +22,8 @@ const baseStyles =
 
 const variants: Record<Variant, string> = {
     primary: "bg-green-500 text-black hover:bg-green-400 focus:ring-green-500",
-    secondary: "border border-white/20 bg-white/5 text-white hover:bg-white/10 focus:ring-green-500",
-    ghost: "text-white/70 hover:text-white",
+    secondary: "border border-theme bg-theme-surface text-theme hover:bg-theme-surface-hover focus:ring-green-500",
+    ghost: "text-theme-secondary hover:text-theme",
 };
 
 export default function Button(props: Props) {

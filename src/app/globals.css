@@ -1,5 +1,45 @@
 @import "tailwindcss";
 
+/* ---- Theme variables ---- */
+:root {
+  --page-bg: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #0f0f1e 100%);
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.10);
+  --border: rgba(255, 255, 255, 0.10);
+  --text-primary: rgba(255, 255, 255, 1);
+  --text-secondary: rgba(255, 255, 255, 0.70);
+  --text-muted: rgba(255, 255, 255, 0.60);
+  --text-faint: rgba(255, 255, 255, 0.40);
+  --text-subtle: rgba(255, 255, 255, 0.50);
+  --navbar-bg: rgba(0, 0, 0, 0.30);
+}
+
+html[data-theme="light"] {
+  --page-bg: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+  --surface: rgba(15, 23, 42, 0.04);
+  --surface-hover: rgba(15, 23, 42, 0.08);
+  --border: rgba(15, 23, 42, 0.12);
+  --text-primary: rgba(15, 23, 42, 1);
+  --text-secondary: rgba(15, 23, 42, 0.70);
+  --text-muted: rgba(15, 23, 42, 0.60);
+  --text-faint: rgba(15, 23, 42, 0.40);
+  --text-subtle: rgba(15, 23, 42, 0.50);
+  --navbar-bg: rgba(248, 250, 252, 0.80);
+}
+
+/* ---- Semantic utilities ---- */
+@layer utilities {
+  .text-theme { color: var(--text-primary); }
+  .text-theme-secondary { color: var(--text-secondary); }
+  .text-theme-muted { color: var(--text-muted); }
+  .text-theme-faint { color: var(--text-faint); }
+  .text-theme-subtle { color: var(--text-subtle); }
+  .bg-theme-surface { background-color: var(--surface); }
+  .bg-theme-surface-hover { background-color: var(--surface-hover); }
+  .hover\:bg-theme-surface-hover:hover { background-color: var(--surface-hover); }
+  .border-theme { border-color: var(--border); }
+}
+
 @keyframes matrix-fall {
   0%   { transform: translateY(0);     opacity: 0.8; }
   100% { transform: translateY(100vh); opacity: 0;   }
@@ -11,8 +51,8 @@
   }
 
   body {
-    background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #0f0f1e 100%);
-    color: white;
+    background: var(--page-bg);
+    color: var(--text-primary);
   }
 
   a {
