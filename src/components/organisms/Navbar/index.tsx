@@ -12,7 +12,7 @@ import type { Locale } from "@/i18n/translations";
 
 const PlaneGame = dynamic(() => import("@/components/organisms/PlaneGame"), { ssr: false });
 
-type Hash = "#projects" | "#experience" | "#skills" | "#contact";
+type Hash = "#projects" | "#experience" | "#skills";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -37,7 +37,6 @@ export default function Navbar() {
     { label: t.nav.projects, hash: "#projects" as Hash },
     { label: t.nav.experience, hash: "#experience" as Hash },
     { label: t.nav.skills, hash: "#skills" as Hash },
-    { label: t.nav.contact, hash: "#contact" as Hash },
   ];
 
   const buildHref = (hash: Hash) => (isHome ? hash : `/${hash}`);
@@ -71,6 +70,12 @@ export default function Navbar() {
                   {item.label}
                 </a>
               ))}
+              <Link
+                href="/contact"
+                className="text-sm text-theme-secondary hover:text-green-400 transition-colors"
+              >
+                {t.nav.contact}
+              </Link>
             </nav>
 
             <div className="flex items-center gap-2">
@@ -99,12 +104,7 @@ export default function Navbar() {
                 {otherLocale.toUpperCase()}
               </button>
 
-              <Button
-                as="link"
-                href={buildHref("#contact")}
-                variant="secondary"
-                className="h-10 px-4"
-              >
+              <Button as="link" href="/contact" variant="secondary" className="h-10 px-4">
                 {t.nav.contactBtn}
               </Button>
             </div>
@@ -114,15 +114,15 @@ export default function Navbar() {
 
       {gameOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="relative">
+          <div className="relative w-[min(96vw,1100px)] h-[min(88vh,680px)]">
             <button
               onClick={() => setGameOpen(false)}
-              className="absolute -top-12 -right-12 z-10 w-10 h-10 flex items-center justify-center text-2xl font-bold text-green-400/70 hover:text-green-400 hover:scale-110 transition-all border border-green-500/30 rounded-full hover:border-green-400/60 bg-black/60"
+              className="absolute top-3 right-3 z-10 w-10 h-10 flex items-center justify-center text-2xl font-bold text-green-400/70 hover:text-green-400 hover:scale-110 transition-all border border-green-500/30 rounded-full hover:border-green-400/60 bg-black/60"
               aria-label="Close game"
             >
               ✕
             </button>
-            <div className="w-[min(90vw,700px)] h-[min(80vh,420px)] rounded-xl border border-green-500/30 overflow-hidden bg-[#0a0f0a]">
+            <div className="w-full h-full rounded-xl border border-green-500/30 overflow-hidden bg-[#0a0f0a]">
               <PlaneGame />
             </div>
           </div>

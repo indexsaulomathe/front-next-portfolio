@@ -3,6 +3,7 @@
 /* ---- Theme variables ---- */
 :root {
   --page-bg: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #0f0f1e 100%);
+  --page-bg-solid: #0a0a0a;
   --surface: rgba(255, 255, 255, 0.05);
   --surface-hover: rgba(255, 255, 255, 0.10);
   --border: rgba(255, 255, 255, 0.10);
@@ -16,6 +17,7 @@
 
 html[data-theme="light"] {
   --page-bg: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+  --page-bg-solid: #f1f5f9;
   --surface: rgba(15, 23, 42, 0.04);
   --surface-hover: rgba(15, 23, 42, 0.08);
   --border: rgba(15, 23, 42, 0.12);
@@ -38,6 +40,7 @@ html[data-theme="light"] {
   .bg-theme-surface-hover { background-color: var(--surface-hover); }
   .hover\:bg-theme-surface-hover:hover { background-color: var(--surface-hover); }
   .border-theme { border-color: var(--border); }
+  .border-theme-bg-solid { border-color: var(--page-bg-solid); }
 }
 
 @keyframes matrix-fall {

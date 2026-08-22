@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio — Saulo Matheus
 
-## Getting Started
+Portfólio pessoal de **Saulo Matheus de Rezende**, Backend Software Engineer com foco em NestJS, Node.js, TypeScript e arquitetura de microsserviços.
 
-First, run the development server:
+Site: https://indexsaulomathe.github.io/front-next-portfolio
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Sobre
+
+Aplicação em Next.js (App Router) que apresenta perfil profissional, experiência, skills e projetos, com suporte a tema claro/escuro e i18n (pt/en).
+
+## Stack
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS
+- React Three Fiber / Three.js (elementos visuais 3D)
+
+## Estrutura
+
+```
+src/
+  app/                # rotas (App Router)
+  components/
+    atoms/             # componentes base (Button, Badge, Typography...)
+    molecules/          # composições simples (ProjectCard, SectionHeader)
+    organisms/           # seções da página (Hero, Experience, Skills, Contact...)
+    templates/            # composição das páginas
+  i18n/                # contexto de idioma e tema
+  shared/
+    data/               # dados de projetos
+    seo/                # metadados do site
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Como executar
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn install
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Abra [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn build
+yarn start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Lint
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+yarn lint
+```
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Publicado via GitHub Actions (`.github/workflows/deploy.yml`) para GitHub Pages.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contato
+
+- LinkedIn: [linkedin.com/in/indexsaulomathe](https://www.linkedin.com/in/indexsaulomathe/)
+- GitHub: [github.com/indexsaulomathe](https://github.com/indexsaulomathe)
