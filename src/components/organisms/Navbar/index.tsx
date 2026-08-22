@@ -114,15 +114,15 @@ export default function Navbar() {
 
       {gameOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm">
-          <div className="relative">
+          <div className="relative w-[min(96vw,1100px)] h-[min(88vh,680px)]">
             <button
               onClick={() => setGameOpen(false)}
-              className="absolute -top-12 -right-12 z-10 w-10 h-10 flex items-center justify-center text-2xl font-bold text-green-400/70 hover:text-green-400 hover:scale-110 transition-all border border-green-500/30 rounded-full hover:border-green-400/60 bg-black/60"
+              className="absolute top-3 right-3 z-10 w-10 h-10 flex items-center justify-center text-2xl font-bold text-green-400/70 hover:text-green-400 hover:scale-110 transition-all border border-green-500/30 rounded-full hover:border-green-400/60 bg-black/60"
               aria-label="Close game"
             >
               ✕
             </button>
-            <div className="w-[min(90vw,700px)] h-[min(80vh,420px)] rounded-xl border border-green-500/30 overflow-hidden bg-[#0a0f0a]">
+            <div className="w-full h-full rounded-xl border border-green-500/30 overflow-hidden bg-[#0a0f0a]">
               <PlaneGame />
             </div>
           </div>

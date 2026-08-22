@@ -57,6 +57,37 @@ function spawnBrick(x: number, y: number): { group: THREE.Group; entry: Omit<Obs
   return { group, entry: { x, y, w, h, d } };
 }
 
+function spawnPipe(x: number, y: number): { group: THREE.Group; entry: Omit<ObsEntry, "mesh"> } {
+  const radius = 0.55 + Math.random() * 0.6;
+  const len = 1.4 + Math.random() * 1.6;
+  const color = LEGO_COLORS[Math.floor(Math.random() * LEGO_COLORS.length)];
+
+  const mat = new THREE.MeshStandardMaterial({
+    color, roughness: 0.35, metalness: 0.4,
+    emissive: new THREE.Color(color).multiplyScalar(0.22),
+  });
+
+  const group = new THREE.Group();
+  group.position.set(x, y, SPAWN_Z);
+  const mesh = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, len, 16), mat);
+  mesh.rotation.x = Math.PI / 2;
+  group.add(mesh);
+
+  const ringMat = mat.clone();
+  ringMat.emissiveIntensity = 1.4;
+  for (const side of [-1, 1]) {
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(radius * 0.95, 0.05, 8, 20), ringMat);
+    ring.position.z = (len / 2) * side;
+    group.add(ring);
+  }
+
+  return { group, entry: { x, y, w: radius * 2, h: radius * 2, d: len } };
+}
+
+function spawnObstacle(x: number, y: number) {
+  return Math.random() < 0.35 ? spawnPipe(x, y) : spawnBrick(x, y);
+}
+
 function spawnFrags(
   fragGroup: THREE.Group,
   x: number, y: number, z: number,
@@ -115,32 +146,34 @@ function GameScene({ onUpdate }: { onUpdate: (phase: Phase, score: number) => vo
     restartTimer: 0, shake: 0, speed: 0.32,
   });
 
-  // Input — mouse controls plane, click shoots, no keyboard
+  // Input — pointer events unify mouse/touch/pen: move aims, pointerdown shoots.
+  // (Old click-to-shoot missed most mobile taps because the drag already in
+  // progress suppresses the synthetic click; pointerdown always fires.)
   useEffect(() => {
     const el = gl.domElement;
     const inp = inputRef.current;
 
-    const onMouseMove = (e: MouseEvent) => {
+    const updateAim = (clientX: number, clientY: number) => {
       const r = el.getBoundingClientRect();
-      inp.tx = ((e.clientX - r.left) / r.width * 2 - 1) * BOUNDS_X;
-      inp.ty = (1 - (e.clientY - r.top) / r.height * 2) * BOUNDS_Y;
+      inp.tx = ((clientX - r.left) / r.width * 2 - 1) * BOUNDS_X;
+      inp.ty = (1 - (clientY - r.top) / r.height * 2) * BOUNDS_Y;
     };
 
-    const onTouch = (e: TouchEvent) => {
-      const r = el.getBoundingClientRect();
-      inp.tx = ((e.touches[0].clientX - r.left) / r.width * 2 - 1) * BOUNDS_X;
-      inp.ty = (1 - (e.touches[0].clientY - r.top) / r.height * 2) * BOUNDS_Y;
+    const onPointerMove = (e: PointerEvent) => updateAim(e.clientX, e.clientY);
+    const onPointerDown = (e: PointerEvent) => {
+      updateAim(e.clientX, e.clientY);
+      shootRequestRef.current = true;
     };
 
-    const onShoot = () => { shootRequestRef.current = true; };
+    const prevTouchAction = el.style.getPropertyValue("touch-action");
+    el.style.setProperty("touch-action", "none");
 
-    window.addEventListener("mousemove", onMouseMove);
-    el.addEventListener("touchmove", onTouch, { passive: true });
-    el.addEventListener("click", onShoot);
+    window.addEventListener("pointermove", onPointerMove);
+    el.addEventListener("pointerdown", onPointerDown);
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      el.removeEventListener("touchmove", onTouch);
-      el.removeEventListener("click", onShoot);
+      window.removeEventListener("pointermove", onPointerMove);
+      el.removeEventListener("pointerdown", onPointerDown);
+      el.style.setProperty("touch-action", prevTouchAction);
     };
   }, [gl]);
 
@@ -180,11 +213,17 @@ function GameScene({ onUpdate }: { onUpdate: (phase: Phase, score: number) => vo
       }
 
       // Plane movement + bank
-      g.px += (inp.tx - g.px) * 0.09;
-      g.py += (inp.ty - g.py) * 0.09;
+      g.px += (inp.tx - g.px) * 0.22;
+      g.py += (inp.ty - g.py) * 0.22;
       const bank = -(inp.tx - g.px) * 0.14;
       planeRef.current.position.set(g.px, g.py, PLANE_Z);
       planeRef.current.rotation.set(0, Math.PI / 2, bank);
+
+      // Camera parallax — follows the plane a little for a stronger sense of depth
+      const camX = camera.position.x + (g.px * 0.12 - camera.position.x) * 0.06;
+      const camY = camera.position.y + (1.5 + g.py * 0.08 - camera.position.y) * 0.06;
+      camera.position.set(camX, camY, camera.position.z);
+      camera.lookAt(g.px * 0.3, g.py * 0.3, PLANE_Z - 6);
 
       // Process shoot request
       if (shootRequestRef.current && bulletRef.current) {
@@ -202,7 +241,7 @@ function GameScene({ onUpdate }: { onUpdate: (phase: Phase, score: number) => vo
       if (g.frame % every === 0) {
         const x = (Math.random() - 0.5) * BOUNDS_X * 2;
         const y = (Math.random() - 0.5) * BOUNDS_Y * 2;
-        const { group, entry } = spawnBrick(x, y);
+        const { group, entry } = spawnObstacle(x, y);
         obsRef.current.add(group);
         g.obstacles.push({ mesh: group, ...entry });
       }
@@ -322,6 +361,7 @@ function GameScene({ onUpdate }: { onUpdate: (phase: Phase, score: number) => vo
 
   return (
     <>
+      <fog attach="fog" args={["#030a05", 18, 128]} />
       <Stars radius={100} depth={50} count={4000} factor={4} saturation={0} fade speed={2} />
       <ambientLight intensity={0.35} />
       <directionalLight position={[5, 8, 3]} intensity={1.4} />
@@ -406,15 +446,45 @@ function GameScene({ onUpdate }: { onUpdate: (phase: Phase, score: number) => vo
       <group ref={bulletRef} />
 
       <EffectComposer>
-        <Bloom luminanceThreshold={0.28} luminanceSmoothing={0.85} intensity={1.6} />
+        <Bloom luminanceThreshold={0.22} luminanceSmoothing={0.85} intensity={2} />
       </EffectComposer>
     </>
   );
 }
 
+const HIGH_SCORE_KEY = "plane-game-high-score";
+
+function readStoredHighScore(): number {
+  try {
+    return Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0;
+  } catch {
+    return 0; // localStorage unavailable (private mode, blocked) — high score just won't persist
+  }
+}
+
 export default function PlaneGame() {
   const [state, setState] = useState<{ phase: Phase; score: number }>({ phase: "playing", score: 0 });
-  const handle = useCallback((phase: Phase, score: number) => setState({ phase, score }), []);
+  const [highScore, setHighScore] = useState(readStoredHighScore);
+  const [isNewRecord, setIsNewRecord] = useState(false);
+  const highScoreRef = useRef(highScore);
+
+  const handle = useCallback((phase: Phase, score: number) => {
+    setState({ phase, score });
+
+    if (phase === "gameover") {
+      const isNew = score > highScoreRef.current;
+      if (isNew) {
+        highScoreRef.current = score;
+        setHighScore(score);
+        try {
+          localStorage.setItem(HIGH_SCORE_KEY, String(score));
+        } catch {
+          // ignore — best effort persistence
+        }
+      }
+      setIsNewRecord(isNew && score > 0);
+    }
+  }, []);
 
   return (
     <div className="relative w-full h-full">
@@ -430,8 +500,11 @@ export default function PlaneGame() {
         <div className="absolute top-3 left-4 text-sm text-green-400 drop-shadow-[0_0_6px_rgba(74,222,128,0.7)]">
           score: {state.score}
         </div>
+        <div className="absolute top-3 right-4 text-sm text-white/40">
+          recorde: {highScore}
+        </div>
         <div className="absolute bottom-3 left-0 right-0 text-center text-[11px] text-white/30">
-          mova o mouse para desviar · clique para atirar
+          mova o mouse ou toque para desviar · clique/toque para atirar
         </div>
 
         {state.phase === "gameover" && (
@@ -440,6 +513,11 @@ export default function PlaneGame() {
               BOOM!
             </div>
             <div className="text-sm text-white/70">score: {state.score}</div>
+            {isNewRecord && (
+              <div className="text-xs font-bold text-yellow-300 drop-shadow-[0_0_8px_rgba(253,224,71,0.8)]">
+                novo recorde!
+              </div>
+            )}
             <div className="text-xs text-white/40 mt-1">reiniciando…</div>
           </div>
         )}
