@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import IdleScreenProvider from "@/components/organisms/IdleScreenProvider";
 import { LanguageProvider } from "@/i18n/LanguageContext";
@@ -66,6 +66,24 @@ export const metadata: Metadata = {
     description,
     images: ["opengraph-image.png"],
   },
+  manifest: "manifest.webmanifest",
+  icons: {
+    // Absolute URLs: unlike openGraph/twitter images, Next does not resolve
+    // relative `icons` hrefs against metadataBase — a relative path here breaks
+    // on nested routes (e.g. /projects/[slug]) since it resolves against the
+    // current page URL instead of the site root.
+    icon: [
+      { url: `${siteMetadata.siteUrl}/icon-192.png`, sizes: "192x192", type: "image/png" },
+      { url: `${siteMetadata.siteUrl}/icon-512.png`, sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: `${siteMetadata.siteUrl}/apple-touch-icon.png`, sizes: "180x180", type: "image/png" },
+    ],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0a0a0a",
 };
 
 const personJsonLd = {
