@@ -16,6 +16,15 @@ const experiences = {
       skills: ["NestJS", "TypeScript", "Node.js", "RabbitMQ", "Docker"],
     },
     {
+      company: "Compass UOL",
+      role: "Software Developer (Programmer I)",
+      period: "Jul 2024 – Jun 2026",
+      current: false,
+      description:
+        "Programa de bolsa técnica da Compass UOL, com formação prática em AWS (EC2, Lambda, SageMaker), Docker, MySQL, Terraform e Scrum. Atuação principal em projeto do setor bancário: modernização e migração de rotinas legadas SAS para Python, executadas em AWS Glue, com validação de dados via Amazon Athena e Amazon S3 garantindo equivalência funcional entre rotinas originais e migradas. Também desenvolvi um protótipo de forecasting com AWS Supply Planning, preparando datasets e configurando modelos de ML para previsão de estoque e pedidos.",
+      skills: ["Python", "SAS", "AWS Glue", "Amazon Athena", "Amazon S3", "Terraform", "Machine Learning"],
+    },
+    {
       company: "Kosmo Studio",
       role: "Software Engineer",
       period: "Jan 2022 – Nov 2024",
@@ -34,6 +43,15 @@ const experiences = {
       description:
         "Development of scalable backend systems in a microservices architecture using NestJS and TypeScript. Responsible for async integrations with RabbitMQ, ensuring decoupled and reliable communication between services. Applied Clean Code, Repository Pattern, and modular architecture in a high-availability Docker environment.",
       skills: ["NestJS", "TypeScript", "Node.js", "RabbitMQ", "Docker"],
+    },
+    {
+      company: "Compass UOL",
+      role: "Software Developer (Programmer I)",
+      period: "Jul 2024 – Jun 2026",
+      current: false,
+      description:
+        "Compass UOL technical scholarship program, with hands-on training in AWS (EC2, Lambda, SageMaker), Docker, MySQL, Terraform and Scrum. Core work on a banking-sector project: modernizing and migrating legacy SAS routines to Python, executed on AWS Glue, validating data via Amazon Athena and Amazon S3 to ensure functional equivalence between original and migrated routines. Also built an AWS Supply Planning forecasting prototype, preparing datasets and configuring ML models for inventory and order predictions.",
+      skills: ["Python", "SAS", "AWS Glue", "Amazon Athena", "Amazon S3", "Terraform", "Machine Learning"],
     },
     {
       company: "Kosmo Studio",

@@ -1,8 +1,8 @@
 export const contactLinks = [
   {
     label: "Email",
-    value: "saulo_mathejobs@gmail.com",
-    href: "mailto:saulo_mathejobs@gmail.com",
+    value: "saulomathejobs@gmail.com",
+    href: "mailto:saulomathejobs@gmail.com",
     external: false,
   },
   {
