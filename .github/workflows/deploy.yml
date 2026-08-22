@@ -29,6 +29,12 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
 
+      - name: Lint
+        run: yarn lint
+
+      - name: Typecheck
+        run: yarn typecheck
+
       - name: Build (static export)
         run: yarn build
         env:
