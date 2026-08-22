@@ -3,27 +3,7 @@
 import SectionHeader from "@/components/molecules/SectionHeader";
 import Button from "@/components/atoms/Button";
 import { useLanguage } from "@/i18n/LanguageContext";
-
-const contactLinks = [
-  {
-    label: "Email",
-    value: "saulo_matheprog@hotmail.com",
-    href: "mailto:saulo_matheprog@hotmail.com",
-    external: false,
-  },
-  {
-    label: "LinkedIn",
-    value: "linkedin.com/in/indexsaulomathe",
-    href: "https://www.linkedin.com/in/indexsaulomathe/",
-    external: true,
-  },
-  {
-    label: "GitHub",
-    value: "github.com/indexsaulomathe",
-    href: "https://github.com/indexsaulomathe",
-    external: true,
-  },
-];
+import { contactLinks } from "@/shared/data/contact-links";
 
 export default function ContactCard() {
   const { t } = useLanguage();
@@ -51,8 +31,8 @@ export default function ContactCard() {
           </div>
 
           <div className="flex flex-col sm:flex-row md:justify-end gap-3">
-            <Button as="link" href="mailto:saulo_matheprog@hotmail.com" variant="primary">
-              {t.contact.sendEmail}
+            <Button as="link" href="/contact" variant="primary">
+              {t.contact.goToContact}
             </Button>
             <Button as="link" href="/projects" variant="secondary">
               {t.contact.viewProjects}

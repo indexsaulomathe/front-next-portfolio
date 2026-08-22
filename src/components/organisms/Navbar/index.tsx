@@ -12,7 +12,7 @@ import type { Locale } from "@/i18n/translations";
 
 const PlaneGame = dynamic(() => import("@/components/organisms/PlaneGame"), { ssr: false });
 
-type Hash = "#projects" | "#experience" | "#skills" | "#contact";
+type Hash = "#projects" | "#experience" | "#skills";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -37,7 +37,6 @@ export default function Navbar() {
     { label: t.nav.projects, hash: "#projects" as Hash },
     { label: t.nav.experience, hash: "#experience" as Hash },
     { label: t.nav.skills, hash: "#skills" as Hash },
-    { label: t.nav.contact, hash: "#contact" as Hash },
   ];
 
   const buildHref = (hash: Hash) => (isHome ? hash : `/${hash}`);
@@ -71,6 +70,12 @@ export default function Navbar() {
                   {item.label}
                 </a>
               ))}
+              <Link
+                href="/contact"
+                className="text-sm text-theme-secondary hover:text-green-400 transition-colors"
+              >
+                {t.nav.contact}
+              </Link>
             </nav>
 
             <div className="flex items-center gap-2">
@@ -99,12 +104,7 @@ export default function Navbar() {
                 {otherLocale.toUpperCase()}
               </button>
 
-              <Button
-                as="link"
-                href={buildHref("#contact")}
-                variant="secondary"
-                className="h-10 px-4"
-              >
+              <Button as="link" href="/contact" variant="secondary" className="h-10 px-4">
                 {t.nav.contactBtn}
               </Button>
             </div>
