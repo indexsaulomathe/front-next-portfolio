@@ -38,14 +38,21 @@ const experiences: { pt: CompanyEntry[]; en: CompanyEntry[] } = {
       positions: [
         {
           role: "Programador | Python & AWS",
-          period: "Fev 2025 – Jun 2026",
+          period: "Abr 2025 – Jun 2026",
           description:
-            "Atuação em projeto do setor bancário voltado à modernização de programas SAS e rotinas de processamento de dados bancários para Python em ambiente AWS, desenvolvendo e adaptando rotinas no AWS Glue e preservando a equivalência funcional com os processos legados. Consultas e validações com Amazon Athena sobre dados no Amazon S3. Também atuei em um protótipo com AWS Supply Planning para cenários de previsão de estoque e pedidos, preparando datasets em Python e configurando o modelo de IA/ML utilizado.",
-          skills: ["Python", "SAS", "AWS Glue", "Amazon Athena", "Amazon S3", "Machine Learning"],
+            "Atuação em projeto do setor bancário voltado à modernização de programas SAS e rotinas bancárias de processamento de dados para Python em ambiente AWS. Análise e depuração de rotinas SAS para compreender regras de negócio, transformações, validações e resultados esperados antes da conversão. Desenvolvimento e adaptação de rotinas Python para execução no AWS Glue, preservando a equivalência funcional com os processos legados. Validação de entradas e saídas, conversão e transformação de dados, além de investigação de divergências entre as implementações SAS e Python. Consultas e validações com Amazon Athena sobre dados armazenados no Amazon S3.",
+          skills: ["Python", "SAS", "AWS Glue", "Amazon Athena", "Amazon S3"],
+        },
+        {
+          role: "Programador I | Python, IA & AWS",
+          period: "Fev 2025 – Mar 2025",
+          description:
+            "Atuação em protótipo e demonstração de produto utilizando AWS Supply Planning para cenários de previsão de estoque e pedidos. Uso de Python para limpeza, conversão, transformação e preparação de dados de estoque, produtos, pedidos e históricos para ingestão na plataforma. Configuração de parâmetros de previsão e do modelo de IA/ML utilizado pelo AWS Supply Planning, com execução e avaliação de cenários. Validação de conjuntos de dados, correção de inconsistências e ajustes de entradas e configurações conforme os resultados das previsões.",
+          skills: ["Python", "AWS Supply Planning", "Machine Learning", "Forecasting"],
         },
         {
           role: "Estagiário de Programação | AWS & Machine Learning",
-          period: "Jul 2024 – Jan 2025",
+          period: "Jul 2024 – Dez 2024",
           description:
             "Participação no Programa de Bolsas da Compass UOL, com formação prática em computação em nuvem, desenvolvimento de software e Machine Learning. Experiência prática com Amazon EC2, AWS Lambda, Amazon SageMaker, Python, Node.js, Docker, MySQL, Terraform, Git e Scrum.",
           skills: ["AWS", "Python", "Node.js", "Docker", "Terraform", "Machine Learning"],
@@ -86,10 +93,17 @@ const experiences: { pt: CompanyEntry[]; en: CompanyEntry[] } = {
       positions: [
         {
           role: "Software Developer | Python & AWS",
-          period: "Feb 2025 – Jun 2026",
+          period: "Apr 2025 – Jun 2026",
           description:
-            "Worked on a banking-sector project modernizing legacy SAS programs and banking data-processing routines into Python on AWS, developing and adapting routines in AWS Glue while preserving functional equivalence with the legacy processes. Queried and validated data with Amazon Athena over datasets in Amazon S3. Also worked on an AWS Supply Planning prototype for inventory and order forecasting scenarios, preparing datasets in Python and configuring the AI/ML model used.",
-          skills: ["Python", "SAS", "AWS Glue", "Amazon Athena", "Amazon S3", "Machine Learning"],
+            "Worked on a banking-sector project focused on modernizing SAS programs and banking data-processing routines into Python on AWS. Analyzed and debugged SAS routines to understand business rules, transformations, validations and expected outputs before conversion. Developed and adapted Python routines for execution on AWS Glue, preserving functional equivalence with the legacy processes. Validated inputs and outputs, converted and transformed data, and investigated discrepancies between the SAS and Python implementations. Queried and validated data with Amazon Athena over datasets stored in Amazon S3.",
+          skills: ["Python", "SAS", "AWS Glue", "Amazon Athena", "Amazon S3"],
+        },
+        {
+          role: "Software Developer I | Python, AI & AWS",
+          period: "Feb 2025 – Mar 2025",
+          description:
+            "Worked on a prototype and product demonstration using AWS Supply Planning for inventory and order forecasting scenarios. Used Python to clean, convert, transform and prepare inventory, product, order and historical data for ingestion into the platform. Configured forecasting parameters and the AI/ML model used by AWS Supply Planning, running and evaluating scenarios. Validated datasets, fixed inconsistencies and adjusted inputs and configurations based on forecasting results.",
+          skills: ["Python", "AWS Supply Planning", "Machine Learning", "Forecasting"],
         },
         {
           role: "Programmer Intern | AWS & Machine Learning",
