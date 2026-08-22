@@ -1,0 +1,21 @@
+# Saulo Matheus de Rezende
+
+> Backend Software Engineer especializado em NestJS, Node.js, TypeScript e Python, com foco em microsserviços, integrações assíncronas com RabbitMQ e sistemas de pagamento de alta disponibilidade.
+
+Mais de 4 anos de experiência profissional construindo APIs, microsserviços e sistemas financeiros escaláveis.
+
+## Stack principal
+
+Node.js, NestJS, TypeScript, Python, RabbitMQ, PostgreSQL, Docker, AWS, REST APIs, Microservices.
+
+## Experiência
+
+- Software Engineer @ Brasil Card Instituição de Pagamentos (Out 2024 – Presente): backend em microsserviços com NestJS/TypeScript, integrações assíncronas via RabbitMQ.
+- Software Engineer @ Kosmo Studio (Jan 2022 – Nov 2024): full stack, Vue.js/Nuxt.js/React.js, NestJS, TypeScript.
+
+## Links
+
+- Site: https://indexsaulomathe.github.io/front-next-portfolio
+- Projetos: https://indexsaulomathe.github.io/front-next-portfolio/projects
+- LinkedIn: https://www.linkedin.com/in/indexsaulomathe/
+- GitHub: https://github.com/indexsaulomathe

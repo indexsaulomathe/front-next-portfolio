@@ -21,8 +21,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!project) return { title: "Projeto não encontrado" };
 
   return {
-    title: `${project.title} • Saulo Matheus`,
+    title: project.title,
     description: project.description,
+    alternates: { canonical: `/projects/${project.slug}` },
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.description,
+    },
   };
 }
 
