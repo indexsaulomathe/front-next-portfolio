@@ -13,6 +13,8 @@ type ButtonProps = {
 
 type LinkButtonProps = ButtonProps & {
     href: string;
+    target?: string;
+    rel?: string;
 };
 
 type Props = ButtonProps | (LinkButtonProps & { as: "link" });
@@ -32,7 +34,7 @@ export default function Button(props: Props) {
 
     if ("as" in props && props.as === "link") {
         return (
-            <Link href={props.href} className={className}>
+            <Link href={props.href} className={className} target={props.target} rel={props.rel}>
                 {props.children}
             </Link>
         );

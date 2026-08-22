@@ -52,6 +52,27 @@ export default function Hero() {
               </Button>
             </div>
 
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Button
+                href="https://www.linkedin.com/in/indexsaulomathe/"
+                as="link"
+                variant="ghost"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+              <Button
+                href="https://github.com/indexsaulomathe"
+                as="link"
+                variant="ghost"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+            </div>
+
             <div className="mt-6 text-xs sm:text-sm text-theme-subtle">
               {s.stackLabel}{" "}
               <span className="text-green-400">
